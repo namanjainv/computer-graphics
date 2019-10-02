@@ -1,0 +1,45 @@
+#-----------------------------------------------------------
+* Get pyopengl and pyopengl-accelerate installed.  The best
+  way to do this is using Anaconda.
+
+  Here's what I have installed:
+
+    $ conda list opengl
+    # packages in environment at /home/dalioba/anaconda3:
+    #
+    # Name                    Version                   Build  Channel
+    pyopengl                  3.1.1a1                  py37_0  
+    pyopengl-accelerate       3.1.3b1          py37hdd07704_0
+    $
+
+* Run the example using Python 3:
+
+    $ python --version
+    Python 3.7.4
+    $ python pyopengl_sample.py
+
+* Once the program is running, these commands are available:
+
+  ESC -- exit the program.
+  s   -- save a screenshot and a depth map, both as PNG files.
+  g   -- grow the dimensions by 15%.
+  r   -- reset the dimensions to their initial values.
+
+* The window can be resized also by grabbing the edge or corner
+  and dragging.  At present, this causes the screenshot images to
+  be screwed up.  Using r to reset the window size 'fixes' this
+  problem.
+
+* First person to email me a revised version of the script that
+  doesn't have this issue WHEN RUN IN MY ENVIRONMENT scores a
+  bonus point.
+
+* I'm looking into this myself.  As soon as I realize what's up,
+  I'll send an email to the class.  At that point, no bonus point
+  will be awarded, so think fast! :)
+
+* Take a look at the code for this example.  It has some
+  interesting features.
+
+#-----------------------------------------------------------
+
