@@ -1,0 +1,141 @@
+#----------------------------------------------------------------------
+Assignment 02
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate ability to compute the parameters of a Parallel
+    Projection and then use those parameters to transform a
+    model's vertices and faces.
+
+#----------------------------------------------------------------------
+Background:
+
+  * All the math you need for this assignment is in the handout
+    "4303 Projection Parallel.pdf", posted on Canvas.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_02_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_02_abc1234' but with _your_ NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the file hmwk_02.c.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD.
+
+  6. Execute this command to see the template file run:
+
+      $ gcc -o hmwk_02 hmwk_02.c model.c view.c
+      $ ./hmwk_02 Tests/pyramid.svfm Tests/setting_01.view
+      #- Model parameters --------------------
+      Vertex count :     5
+      Face count   :     6
+
+      #- Vertex list -------------------------
+        [    0]       0.000000,      0.000000,      0.000000
+        [    1]       0.800000,      0.000000,      0.000000
+        [    2]       0.000000,      0.800000,      0.000000
+        [    3]       0.800000,      0.800000,      0.000000
+        [    4]       0.400000,      0.400000,      0.700000
+
+      #- Face list ---------------------------
+        [    0]      3,     1,     0
+        [    1]      2,     3,     0
+        [    2]      1,     4,     0
+
+      .
+      .
+      .
+
+     See the screenshot 01_hmwk_02_template_run.png for the rest
+     of that data display.
+
+  7. Now change lines 35-38 so that you compute fx, fy, gx, gy,
+     sx, sy, ax, and ay.
+
+  8. Change lines 53-57 so that you retrieve x, y and compute pX,
+     pY for each vertex of the model.
+
+  9. Change lines 72-77 so that you retrieve x, y for each vertex
+     of each face of the model and compute the corresponding v1pX,
+     v1pY, v2pX, v2pY, v3pX, and v3pY.
+
+ 10. Recompile hmwk_02.c and run it again with the arguments
+     Tests/pyramid.svfm and Tests/setting_01.view and you should
+     get the results as shown in the screenshot
+     02_hmwk_02_answer_run.png.  (These results are also given in
+     the file Tests/results_01.txt.)
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_02_abc1234' directory (with your
+source file in it) and submit it on Canvas as your results
+for this assignment.
+
+You can get dinged points for work not in the proper format so
+even if your program works (and works correctly!), you might not
+earn full credit.  Check your work!
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and run correctly.  Not
+     compiling or not generating the correct output as shown in
+     results_01.txt and results_02.txt will cost you points.
+
+     The output from your program will be compared using diff
+     against the reference results so ensure you DO NOT CHANGE
+     anything aside from those three sections of code mentioned
+     above.
+
+  2. Ensure that you update the three header lines in the source
+     file hmwk_02.c with YOUR name (family name first, then a
+     comma, then your personal name), YOUR NetID, and the date you
+     edit the file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. Ensure your submission is packaged EXACTLY as described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_02_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_02_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source file should be in that directory.  The
+         source file should be named hmwk_02.c.
+
+     Submissions in the wrong format score ZERO points.
+
+  4. After you submit your zip file on Canvas, download it
+     from Canvas and check that your submission is in the
+     proper format, that the program runs and prints the correct
+     output, and that you updated the header lines correctly in
+     the source file hmwk_02.c.
+
+  5. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------
