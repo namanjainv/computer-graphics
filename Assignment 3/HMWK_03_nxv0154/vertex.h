@@ -1,6 +1,6 @@
-// Dalio, Brian A.
-// dalioba
-// 2019-10-14
+// Vimal Kumar, Naman Jain
+// nxv0154
+// 2019-10-21
 
 #if !defined( __VERTEX_H__ )
 #define __VERTEX_H__

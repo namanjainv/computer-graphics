@@ -1,6 +1,6 @@
-// Dalio, Brian A.
-// dalioba
-// 2019-10-20
+// Vimal Kumar, Naman Jain
+// nxv0154
+// 2019-10-21
 //----------------------------------------------------------
 #include <ctype.h>
 #include <math.h>
@@ -106,8 +106,12 @@ Model *loadModel( char *fName )
   size_t  len         = 0;
   size_t  read;
 
-  // TODO: Declare variables to hold the mins and maxes for
-  //       x, y, and z.  Initialize them properly.
+  double min_x = 999;
+  double min_y = 999;
+  double min_z = 999;
+  double max_x = -999;
+  double max_y = -999;
+  double max_z = -999;
 
   while ( ( read = getline( &line, &len, fp ) ) != -1 ) {
     char *ptr = line;
@@ -141,9 +145,12 @@ Model *loadModel( char *fName )
         fprintf( stderr, "loadModel: Unable to load vertex at line %d.", lineNum );
       }
 
-      // TODO: Keeping running values for mins and maxes
-      //       for x, y, z.  (Use the min, max functions
-      //       declared above.)
+      min_x = min(min_x, vertex->x);
+      min_y = min(min_y, vertex->y);
+      min_z = min(min_z, vertex->z);
+      max_x = max(max_x, vertex->x);
+      max_y = max(max_y, vertex->y);
+      max_z = max(max_z, vertex->z);
 
       vertex++;
       continue;
@@ -166,10 +173,9 @@ Model *loadModel( char *fName )
     }
   }
 
-  // TODO: Using the tracked mins and maxes for x, y, and z
-  //       compute the center of the model and store its x,
-  //       y, z coordinates in model->m_center.
-
+  model->m_center.x = (min_x + max_x)/2;
+  model->m_center.y = (min_y + max_y)/2;
+  model->m_center.z = (min_z + max_z)/2;
   //--------------------------------------
   if ( line != NULL ) {
     free( line );
