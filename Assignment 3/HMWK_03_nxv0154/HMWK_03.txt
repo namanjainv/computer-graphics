@@ -1,0 +1,222 @@
+#----------------------------------------------------------------------
+Assignment 03
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate ability to compute the parameters of a Perspective
+    Projection and then use those parameters to transform a
+    model's vertices and faces.
+
+  * Demonstracte ability to compute Euler rotations and use same
+    to rotate a model's vertices.
+
+#----------------------------------------------------------------------
+Background:
+
+  * All the math you need for this assignment is in the handouts
+    "4303 Projections.pdf" and "4303 Euler Angle Transform.pdf",
+    both posted on Canvas.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_03_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_03_abc1234' but with _your_ NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the *.c and *.h files.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD.
+
+  6. Execute this command to see the hmwk_03_a.c template run:
+
+      $ gcc -o hmwk_03_a hmwk_03_a.c model.c projection.c vertex.c view.c
+      $ ./hmwk_03_a Tests/pyramid.svfm Tests/pyramid_setting_01.view
+      #- Model parameters --------------------
+      Vertex count :     5
+      Face count   :     6
+      Center       : (      0.000000,      0.000000,      0.000000 )
+
+      #- Vertex list -------------------------
+        [    0]       0.000000,      0.000000,      0.000000
+        [    1]       0.800000,      0.000000,      0.000000
+        [    2]       0.000000,      0.800000,      0.000000
+        [    3]       0.800000,      0.800000,      0.000000
+        [    4]       0.400000,      0.400000,      0.700000
+
+      #- Face list ---------------------------
+        [    0]      3,     1,     0
+        [    1]      2,     3,     0
+        [    2]      1,     4,     0
+        [    3]      4,     2,     0
+        [    4]      1,     3,     4
+        [    5]      2,     4,     3
+      #---------------------------------------
+
+      .
+      .
+      .
+
+  7. Execute this command to see the hmwk_03_b.c template run:
+
+      $ gcc -o hmwk_03_b hmwk_03_b.c model.c projection.c vertex.c view.c
+      $ ./hmwk_03_b Tests/pyramid.svfm Tests/pyramid_setting_01.view
+      c  500  400
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+      p      0.0      0.0      0.0      0.0      0.0      0.0
+
+  8. Now fix all of the TODO: spots in the *.c files:
+
+      hmwk_03_a.c:59:  // TODO: Retrieve the rotated/projected values of the three ...
+      hmwk_03_b.c:43:  // TODO: Retrieve the rotated/projected values of the three ...
+      model.c:109:     // TODO: Declare variables to hold the mins and maxes for ...
+      model.c:144:     // TODO: Keeping running values for mins and maxes ...
+      model.c:169:     // TODO: Using the tracked mins and maxes for x, y, and z ...
+      projection.c:30: // TODO: Compute the proper values of fx, fy, gx, gy, sx, sy, ...
+      projection.c:59: // TODO: Using the projection parameters in p, traverse the ...
+      projection.c:73: // TODO: Using the Euler angles given in the view, traverse the ...
+
+     Each spot tells you what you need to write.
+
+  9. Recompile hmwk_03_a.c and run it again with the arguments
+     Tests/pyramid.svfm and Tests/pyramid_setting_01.view and you
+     should get the results as shown in the file
+     Results/pyramid_01_results.txt.
+
+ 10. Recompile hmwk_03_b.c and run it again with the arguments
+     Tests/pyramid.svfm and Tests/pyramid_setting_01.view and you
+     should get the results as shown in the file
+     Results/pyramid_01_results.sdf.
+
+ 11. There are lots more settings files for the pyramid.svfm
+     model in the Tests/ directory.  Some include Euler rotation,
+     some include perspective projection, some include both.
+
+ 12. There's also a much larger model Monkey.svfm.  There are
+     multiple settings files for this model as well.
+
+ 13. Capture the output of hmwk_03_b in a file with the extension
+     "sdf" and you can display it using the provide Display tool.
+
+     Your displays should look like the provided screenshots.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_03_abc1234' directory (with your
+source file in it) and submit it on Canvas as your results
+for this assignment.
+
+You can get dinged points for work not in the proper format so
+even if your program works (and works correctly!), you might not
+earn full credit.  Check your work!
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and run correctly.  Not
+     compiling or not generating the correct output as shown in
+     the results txt and sdf files will cost you points.
+
+     The output from your programs will be compared using diff
+     against the reference results so ensure you DO NOT CHANGE
+     anything aside from those TODO sections of code mentioned
+     above.
+
+     Please, please, please check your output against the
+     reference solutions using diff (or fc on Windows).  Output
+     that does not match EXACTLY scores ZERO points.
+
+  2. Ensure that you update the three header lines in the source
+     files with YOUR name (family name first, then a comma, then
+     your personal name), YOUR NetID, and the date you edit the
+     file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. Remember that angles must be converted from degrees to
+     radians!
+
+  4. When rotating or projecting a vertex, be sure to use the
+     _original_ values of the vertex's x, y, and z throughout
+     your calculation and update the values in the structure
+     after after the rotated / projected x, y, and z are
+     calculated.
+
+  5. This is not a lot of code:
+
+      hmwk_03_a.c:59:  // TODO: Retrieve the rotated/projected values of the three ...
+        6 lines of code.
+
+      hmwk_03_b.c:43:  // TODO: Retrieve the rotated/projected values of the three ...
+        6 lines of code.
+
+      model.c:109:     // TODO: Declare variables to hold the mins and maxes for ...
+        6 lines of code.
+
+      model.c:144:     // TODO: Keeping running values for mins and maxes ...
+        6 lines of code.
+
+      model.c:169:     // TODO: Using the tracked mins and maxes for x, y, and z ...
+        3 lines of code.
+
+      projection.c:30: // TODO: Compute the proper values of fx, fy, gx, gy, sx, sy, ...
+       11 lines of code.
+
+      projection.c:59: // TODO: Using the projection parameters in p, traverse the ...
+       17 lines of code.
+
+      projection.c:73: // TODO: Using the Euler angles given in the view, traverse the ...
+       26 lines of code.
+
+     NOTE: You do not have to end up with EXACTLY the same number
+           of lines of code.  However, if you find yourself
+           writing a lot more code than this, you are probably
+           going down the wrong path.
+
+  6. Ensure your submission is packaged EXACTLY as described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_03_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_03_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  Do not
+         change the name of any of the source files.
+
+     Submissions in the wrong format score ZERO points.
+
+  7. After you submit your zip file on Canvas, download it
+     from Canvas and check that your submission is in the
+     proper format, that the program runs and prints the correct
+     output, and that you updated the header lines correctly in
+     the source files.
+
+  8. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------

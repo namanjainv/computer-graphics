@@ -1,0 +1,14 @@
+# We are looking at anything that has (x,y) within
+# the square (-1, -1) to (1, 1).  This is a box that
+# stretches infinitely in the z-dimension.
+w   -1.0   -1.0    1.0    1.0
+
+# Canvas is 500 wide by 400 high.
+c    500  400
+
+# For display, we are leaving a 10% border about the
+# active area.
+s    0.1    0.1    0.9    0.9
+
+# We want to rotate the model 45° about the X-axis.
+e   45.0    0.0    0.0
