@@ -27,10 +27,6 @@ Projection *computeProjection( View *v )
 {
   Projection *p = allocProjection();
 
-  // TODO: Compute the proper values of fx, fy, gx, gy, sx, sy,
-  //       ax, and ay and store them in p->...
-  //       Save the camera distance from the view in the
-  //       projection.
   p->m_fx = -v->m_worldXMin; 
   p->m_fy = -v->m_worldYMin;
 
@@ -69,13 +65,15 @@ void freeProjection( Projection *p )
 //----------------------------------------------------------
 void projectVertexList( Projection *p, Vertex *v, int numVertices )
 {
-  // TODO: Using the projection parameters in p, traverse the
-  //       given list of vertices (there are numVertices of them)
-  //       and project each vertex:
-  //         1. If camera distance is not 0.0, first do a
-  //            perspective adjustment.
-  //         2. Once the vertex is adjusted for perspective,
-  //            calculate its corresponding screen coordinates.
+  for ( int i=0; i<numVertices; i++ ) {
+    if(p->m_cameraDistance != 0) {
+      v[i].x = v[i].x / (1-v[i].z/p->m_cameraDistance);
+      v[i].y = v[i].y / (1-v[i].z/p->m_cameraDistance);
+    }
+    v[i].x = p->m_sx*v[i].x + p->m_ax;
+    v[i].y = p->m_sy*v[i].y + p->m_ay;
+    v[i].z = 0;
+  }
 }
 
 //----------------------------------------------------------
@@ -83,12 +81,46 @@ void projectVertexList( Projection *p, Vertex *v, int numVertices )
 
 void rotateVertexList( View *view, Vertex *vertex, int numVertices, Vertex center )
 {
-  // TODO: Using the Euler angles given in the view, traverse the
-  //       given list of vertices (there are numVertices of them)
-  //       and rotate each vertex.
-  //
-  //       Compute the r00 through r22 values and the ex, ey, ez
-  //       values _before_ looping through the vertex list!
+  double phi = DEGREES_TO_RADIANS(view->m_phi);
+  double theta = DEGREES_TO_RADIANS(view->m_theta);
+  double psi = DEGREES_TO_RADIANS(view->m_psi);
+
+  double r00 = cos(psi)*cos(theta);
+  double r01 = -cos(theta)*sin(psi);
+  double r02 = sin(theta);
+  double r10 = cos(phi)*sin(psi) + cos(psi)*sin(phi)*sin(theta);
+  double r11 = cos(phi)*cos(psi) - sin(phi)*sin(psi)*sin(theta);
+  double r12 = -cos(theta)*sin(phi);
+  double r20 = -cos(phi)*cos(psi)*sin(theta) + sin(phi)*sin(psi);
+  double r21 = cos(phi)*sin(psi)*sin(theta) + cos(psi)*sin(phi);
+  double r22 = cos(phi)*cos(theta);
+
+  // // https://www.andre-gaschler.com/rotationconverter/
+  // printf( "  [%5f]  ",r00);
+  // printf( "  [%5f]  ",r01);
+  // printf( "  [%5f]  ",r02);
+  // printf("\n");
+  // printf( "  [%5f]  ",r10);
+  // printf( "  [%5f]  ",r11);
+  // printf( "  [%5f]  ",r12);
+  // printf("\n");
+  // printf( "  [%5f]  ",r20);
+  // printf( "  [%5f]  ",r21);
+  // printf( "  [%5f]  ",r22);
+  // printf("\n");
+
+  double ex = -r00*center.x - r01*center.y - r02*center.z + center.x;
+  double ey = -r10*center.x - r11*center.y - r12*center.z + center.y;
+  double ez = -r20*center.x - r21*center.y - r22*center.z + center.z;
+
+  for ( int i=0; i<numVertices; i++ ) {
+    double x = vertex[i].x;
+    double y = vertex[i].y;
+    double z = vertex[i].z;
+    vertex[i].x = r00*x + r01*y + r02*z + ex;
+    vertex[i].y = r10*x + r11*y + r12*z + ey;
+    vertex[i].z = r20*x + r21*y + r22*z + ez;
+  }
 }
 
 //----------------------------------------------------------
