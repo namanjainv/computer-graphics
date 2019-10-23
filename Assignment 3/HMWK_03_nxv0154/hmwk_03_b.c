@@ -46,6 +46,15 @@ int main( int argc, char *argv[] )
     double v2pX = 0.0, v2pY = 0.0;
     double v3pX = 0.0, v3pY = 0.0;
 
+    v1pX = m->m_vertex[m->m_face[i].v1].x;
+    v1pY = m->m_vertex[m->m_face[i].v1].y;
+
+    v2pX = m->m_vertex[m->m_face[i].v2].x;
+    v2pY = m->m_vertex[m->m_face[i].v2].y;
+
+    v3pX = m->m_vertex[m->m_face[i].v3].x;
+    v3pY = m->m_vertex[m->m_face[i].v3].y;
+
     printf( "p %8.1f %8.1f %8.1f %8.1f %8.1f %8.1f\n",
       v1pX, v1pY, v2pX, v2pY, v3pX, v3pY );
   }
