@@ -1,0 +1,11 @@
+# We are looking at anything that has (x,y) within
+# the following region.  This is a box that stretches
+# infinitely in the z-dimension.
+w   -0.4        -0.25         0.4         0.25
+
+# Canvas is 4:3 => 1024x768
+c   1024  768
+
+# For display, we are leaving a 15% border about the
+# active area.
+s    0.150000    0.150000    0.850000    0.8500000

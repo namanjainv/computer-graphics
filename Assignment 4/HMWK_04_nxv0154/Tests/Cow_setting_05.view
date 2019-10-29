@@ -1,0 +1,18 @@
+# We are looking at anything that has (x,y) within
+# the following region.  This is a box that stretches
+# infinitely in the z-dimension.
+w   -0.5        -0.3         0.5         0.3
+
+# Canvas is 4:3 => 1024x768
+c   1024  768
+
+# For display, we are leaving a 10% border about the
+# active area.
+s    0.100000    0.100000    0.900000    0.9000000
+
+# We want to rotate the model 45° about the X-axis, 10°
+# about the Y-axis, and 20° about the Z-axis.
+e   45.0    10.0    20.0
+
+# Camera distance is ...
+d  0.4

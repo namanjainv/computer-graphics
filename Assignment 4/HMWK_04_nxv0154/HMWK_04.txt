@@ -1,0 +1,224 @@
+#----------------------------------------------------------------------
+Assignment 04
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate the ability to clip lines according to the Cohen
+    Sutherland method.
+
+#----------------------------------------------------------------------
+Background:
+
+  * All the math you need for this assignment is in the handout
+    "4303 Clipping handout, Dalio FA 19.pdf", posted on Canvas.
+
+  * (Be careful if you google this algorithm.  The posted versions
+     I have seen have multiple problems and are unlikely to work
+     without a bunch of tweaking.  You're better off just writing
+     it yourself from the start.)
+
+  * (Also, remember our discussion about the need for EPSILON!)
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_04_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_04_abc1234' but with _your_ NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the *.c and *.h files.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD.
+
+  6. Execute this command to see the hmwk_04.c template run:
+
+      $ gcc -o hmwk_04 hmwk_04.c line.c model.c projection.c vertex.c view.c -lm
+      $ ./hmwk_04 Tests/Monkey.svfm Tests/Monkey_setting_01.view
+      #- Model parameters --------------------
+      # Vertex count :   507
+      # Face count   :   967
+      # Minimum      : (      0.000000,      0.000000,      0.000000 )
+      # Maximum      : (      0.000000,      0.000000,      0.000000 )
+      # Center       : (      0.000000,      0.000000,      0.000000 )
+      #---------------------------------------
+      #- View parameters ---------------------
+      # Euler angles    :     25.000000,    -10.000000,     17.000000
+      # World limits    :     -1.640625,     -1.181250,      1.640625,      1.181250
+      # Camera distance :      2.000000
+      # Canvas width    :   800
+      # Canvas height   :   800
+      # Screen limits   :      0.050000,      0.050000,      0.950000,      0.950000
+      # Portal pixels   :    0,    0,    0,    0
+      #---------------------------------------
+      c  800  800
+      #- Rotation parameters -----------------
+      # r00, r01, r02 :      0.941776,     -0.287930,     -0.173648
+      # r10, r11, r12 :      0.194799,      0.888163,     -0.416198
+      # r20, r21, r22 :      0.274064,      0.358139,      0.892539
+      # ex,  ey,  ez  :      0.000000,      0.000000,      0.000000
+      #---------------------------------------
+      #- Projection parameters ---------------
+      # (fx, fy) : (      1.640625,      1.181250 )
+      # (gx, gy) : (     40.000000,     40.000000 )
+      # (sx, sy) : (    219.428571,    304.761905 )
+      # (ax, ay) : (    400.000000,    400.000000 )
+      $
+
+      Notice that aside from the "c" line for the canvas size
+      there are no drawing lines ("l" or "p" lines).  That's
+      because you haven't written any of the new required routines
+      yet.  (Duh! :)
+
+  7. Now fix all of the TODO: spots in the *.c files:
+
+      hmwk_04.c:49: // TODO: "Draw" the four edges of the portal region as ...
+      hmwk_04.c:59: // TODO: Check each line of each face to see if ...
+      line.c:24:    // TODO: Clip the line l against the portal limits ...
+      line.c:43:    // TODO: Compute the region code for the point x, y ...
+      model.c:184:  // TODO: Remember the minimum and maximum values ...
+      view.c:148:   // TODO: Compute the portal min and max values and ...
+
+     Each spot tells you what you need to write.
+
+  8. Recompile hmwk_04.c and run it again with the arguments
+     Tests/Monkey.svfm and Tests/Monkey_setting_01.view and you
+     should get the results as shown in the file
+     Results/Monkey_01_results.txt.  Your results should match
+     EXACTLY.  (Use diff / fc to compare your output to that of
+     the results file.)
+
+  9. There are lots more settings files for the model files in the
+     Tests/ directory.  Some include Euler rotation, some include
+     perspective projection, some include both.  Your code should
+     get IDENTICAL results to those shown in the corresponding
+     results files in the Results/ directory.
+
+ 10. Capture the output of hmwk_04 in a file with the extension
+     "sdf" and you can display it using the provided Display tool.
+
+     Your displays should look EXACTLY like the provided
+     screenshots.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_04_abc1234' directory (with your
+source files in it) and submit it on Canvas as your results
+for this assignment.
+
+You can get dinged points for work not in the proper format so
+even if your program works (and works correctly!), you might not
+earn full credit.  Check your work!
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and run correctly.  Not
+     compiling or not generating the correct output as shown in
+     the results sdf files will cost you points.
+
+     The output from your programs will be compared using diff
+     against the reference results so ensure you DO NOT CHANGE
+     anything aside from those TODO sections of code mentioned
+     above.
+
+     Please, please, please check your output against the
+     reference solutions using diff (or fc on Windows).  Output
+     that does not match EXACTLY scores ZERO points.
+
+  2. Ensure that you update the three header lines in the source
+     files with YOUR name (family name first, then a comma, then
+     your personal name), YOUR NetID, and the date you edit the
+     file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. Remember to use EPSILON comparisons when computing the region
+     codes.  If you don't it's likely that on some test or another
+     your code for clipLine() will go into an infinite loop.
+
+     Remember to update the "slid" point in the line structure as
+     you iterate in clipLine().  Be sure you update the point you
+     slid!  That is, if you move the first point, update p1 in the
+     Line structure;  if it was the second point that got slid,
+     update p2.
+
+     Remember to recompute the region code for whichever point
+     that got slid before starting the next iteration of the loop.
+     (This is a common omission and it causes havoc!)
+
+     Remember to return whether or not the line should be drawn at
+     all as the value of clipLine().
+
+  4. This is not a lot of code:
+
+      hmwk_04.c:49: // TODO: "Draw" the four edges of the portal region as ...
+        20 lines of code.
+
+      hmwk_04.c:59: // TODO: Check each line of each face to see if ...
+        21 lines of code.
+
+      line.c:24:    // TODO: Clip the line l against the portal limits ...
+        41 lines of code.
+
+      line.c:43:    // TODO: Compute the region code for the point x, y ...
+        12 lines of code.
+
+      model.c:184:  // TODO: Remember the minimum and maximum values ...
+        6 lines of code.
+
+      view.c:148:   // TODO: Compute the portal min and max values and ...
+        4 lines of code.
+
+     NOTE: You do not have to end up with EXACTLY the same number
+           of lines of code.  However, if you find yourself
+           writing a lot more code than this, you are probably
+           going down the wrong path.
+
+  5. Ensure your submission is packaged EXACTLY as described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_04_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_04_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  Do not
+         change the name of any of the source files.
+
+     Submissions in the wrong format score ZERO points.
+
+  6. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the program runs and prints the correct output,
+     and that you updated the header lines correctly in the source
+     files.
+
+     Please, please, please check that you didn't accidentally
+     submit the template code instead of your solution.  Every
+     semester, every class, and almost every homework someone
+     makes this mistake.  Don't be that guy!
+
+  7. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------
