@@ -25,11 +25,8 @@ int clipLine( View *v, Line *l )
   int p2_region = _regionCode(l->p2X, l->p2Y, v);
   if ( (p1_region == p2_region) && (p1_region == INSIDE) )
     return 1;
-  if( ( p1_region & p2_region) != INSIDE) {
-    printf("Line Clipped");
-    dumpLine(l);
+  if( ( p1_region & p2_region) != INSIDE) 
     return 0;
-  }
   
   int l_region = ( p1_region == INSIDE )? p2_region : p1_region;
   int pt = ( p1_region == INSIDE )? 2 : 1;
@@ -37,20 +34,20 @@ int clipLine( View *v, Line *l )
   double y = 0;
   
   if(l_region & ABOVE) {
-    x = l->p1X + ( l->p2X - l->p1X ) * ( v->m_portalYMax - l->p1Y ) * ( l->p2Y - l->p1Y );
+    x = l->p1X + ( l->p2X - l->p1X ) * ( v->m_portalYMax - l->p1Y ) / ( l->p2Y - l->p1Y );
     y = v->m_portalYMax;
   }
   else if(l_region & BELOW) {
-    x = l->p1X + ( l->p2X - l->p1X ) * ( v->m_portalYMin - l->p1Y ) * ( l->p2Y - l->p1Y );
+    x = l->p1X + ( l->p2X - l->p1X ) * ( v->m_portalYMin - l->p1Y ) / ( l->p2Y - l->p1Y );
     y = v->m_portalYMin;
   }
   else if(l_region & RIGHT) {
     x = v->m_portalXMax;
-    y = l->p1Y + ( l->p2Y - l->p1Y ) * ( v->m_portalXMax - l->p1X ) * ( l->p2X - l->p1X );
+    y = l->p1Y + ( l->p2Y - l->p1Y ) * ( v->m_portalXMax - l->p1X ) / ( l->p2X - l->p1X );
   }
   else if(l_region & LEFT) {
     x = v->m_portalXMin;
-    y = l->p1Y + ( l->p2Y - l->p1Y ) * ( v->m_portalXMin - l->p1X ) * ( l->p2X - l->p1X );
+    y = l->p1Y + ( l->p2Y - l->p1Y ) * ( v->m_portalXMin - l->p1X ) / ( l->p2X - l->p1X );
   }
   if(pt == 1) {
     l->p1X = x;
