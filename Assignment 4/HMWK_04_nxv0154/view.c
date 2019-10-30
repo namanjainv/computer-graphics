@@ -145,9 +145,10 @@ View *loadView( char *fName )
 
   //--------------------------------------
 
-  // TODO: Compute the portal min and max values and
-  //       save their values in the m_portal... fields
-  //       in the view structure.
+  view->m_portalXMin = view->m_width * view->m_viewportXMin;
+  view->m_portalXMax = view->m_width * view->m_viewportXMax;
+  view->m_portalYMin = view->m_height * view->m_viewportYMin;
+  view->m_portalYMax = view->m_height * view->m_viewportYMax;
 
   //--------------------------------------
   return view;

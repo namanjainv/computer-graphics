@@ -181,9 +181,12 @@ Model *loadModel( char *fName )
     }
   }
 
-  // TODO: Remember the minimum and maximum values
-  //       in the model structure fields m_minimum
-  //       and m_maximum.
+  model->m_minimum.x = xMin;
+  model->m_minimum.y = yMin;
+  model->m_minimum.z = zMin;
+  model->m_maximum.x = xMax;
+  model->m_maximum.y = yMax;
+  model->m_maximum.z = zMax;
 
   model->m_center.x = ( xMin + xMax ) / 2.0;
   model->m_center.y = ( yMin + yMax ) / 2.0;
