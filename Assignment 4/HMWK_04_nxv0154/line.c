@@ -72,13 +72,13 @@ int _regionCode( double x, double y, View *v )
 {
   int CODE = INSIDE;
 
-  if( x < v->m_portalXMin ) 
+  if( x < v->m_portalXMin - EPSILON ) 
     CODE = CODE | LEFT;
-  else if( x > v->m_portalXMax )
+  else if( x > v->m_portalXMax + EPSILON )
     CODE = CODE | RIGHT;
-  if( y < v->m_portalYMin ) 
+  if( y < v->m_portalYMin - EPSILON ) 
     CODE = CODE | BELOW;
-  else if( y > v->m_portalYMax )
+  else if( y > v->m_portalYMax + EPSILON )
     CODE = CODE | ABOVE;
   return CODE;
 }
