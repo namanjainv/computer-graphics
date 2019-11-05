@@ -1,5 +1,5 @@
-// Dalio, Brian A.
-// dalioba
+// Vimal Kumar, Naman Jain
+// nxv0154
 // 2019-11-05
 //----------------------------------------------------------
 #include <stdio.h>
