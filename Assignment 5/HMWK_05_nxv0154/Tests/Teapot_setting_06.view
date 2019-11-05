@@ -1,0 +1,20 @@
+# Bézier resolution ...
+r 5
+
+# We are looking at anything that has (x,y) within
+# the following region.  This is a box that stretches
+# infinitely in the z-dimension.
+w   -3          -3           4           4
+
+# Canvas is 4:3 => 1024x768
+c   1024  768
+
+# For display, we are leaving a 10% border about the
+# active area.
+s    0.100000    0.100000    0.900000    0.9000000
+
+# We want to rotate the model ...
+e   90.0     0.0     0.0
+
+# Camera distance is ...
+d  10.0

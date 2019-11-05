@@ -1,0 +1,291 @@
+#----------------------------------------------------------------------
+Assignment 05
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate the ability to generate Bézier surfaces according
+    to the method discussed in class.
+
+#----------------------------------------------------------------------
+Background:
+
+  * All the math you need for this assignment is in the handouts
+    "4303 Bézier.pdf" and "4303 Bézier computation.pdf", both
+    posted on Canvas.
+
+    (We have gone over these computations more than once in class
+     so you should not have any difficulties in writing the code.)
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_05_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_05_abc1234' but with _your_ NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the *.c and *.h files.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD.
+
+  6. Execute these commands to compile and run the hmwk_05.c
+     template:
+
+$ gcc -o hmwk_05 hmwk_05.c bezier.c line.c model.c projection.c triangle.c vertex.c view.c -lm
+$ ./hmwk_05 Tests/Hull.svfm Tests/Hull_setting_01.view 
+#- Model parameters --------------------
+# Vertex count       :    16
+# Face count         :     0
+# Patch count        :     1
+# Patch vertex count :   121
+# Minimum            : (      1.000000,      1.000000,      0.000000 )
+# Maximum            : (      4.000000,      4.000000,      2.000000 )
+# Center             : (      2.500000,      2.500000,      1.000000 )
+# Size               : (      3.000000,      3.000000,      2.000000 )
+#---------------------------------------
+#- View parameters ---------------------
+# Bézier resolution :    11
+# Euler angles      :      0.000000,      0.000000,      0.000000
+# World limits      :     -1.000000,     -1.000000,      5.000000,      5.000000
+# Camera distance   :      0.000000
+# Canvas width      :   500
+# Canvas height     :   500
+# Screen limits     :      0.100000,      0.100000,      0.900000,      0.900000
+# Portal pixels     :   50,  450,   50,  450
+#---------------------------------------
+#- Projection parameters ---------------
+# (fx, fy) : (      1.000000,      1.000000 )
+# (gx, gy) : (     50.000000,     50.000000 )
+# (sx, sy) : (     66.666667,     66.666667 )
+# (ax, ay) : (    116.666667,    116.666667 )
+# Camera distance :      0.000000
+#---------------------------------------
+#- Rotation parameters -----------------
+# r00, r01, r02 :      1.000000,     -0.000000,      0.000000
+# r10, r11, r12 :      0.000000,      1.000000,     -0.000000
+# r20, r21, r22 :      0.000000,      0.000000,      1.000000
+# ex,  ey,  ez  :      0.000000,      0.000000,      0.000000
+#---------------------------------------
+c  500  500
+l     50.0     50.0     50.0    450.0
+l     50.0    450.0    450.0    450.0
+l    450.0    450.0    450.0     50.0
+l    450.0     50.0     50.0     50.0
+
+      Notice that aside from the "c" line for the canvas size and
+      the four lines for the portal edges, there are no other
+      drawing lines ("l" or "p" lines).  That's because you
+      haven't written any of the new required routines yet.
+
+  7. Now fix all of the TODO: spots in the *.c files:
+
+      bezier.c:17:   // TODO: Iterate through each patch, each value of u, and each ...
+      bezier.c:30:   // TODO: Iterate through each patch, each row of that patch, and ...
+      bezier.c:45:   // TODO: For the given u and v values, generate the 16 Bernstein ...
+      triangle.c:15: // TODO:  Draw the three lines that are made from v1, v2, and ...
+      triangle.c:24: // TODO:  Remember the view so it can be clipped against when ...
+
+     Each spot tells you what you need to write.
+
+  8. Recompile hmwk_05.c and run it again with the arguments
+     Tests/Hull.svfm and Tests/Hull_setting_01.view and you
+     should get the results as shown in the file
+     Results/Hull_01_results.txt.  Your results should match
+     EXACTLY.  (Use diff / fc to compare your output to that of
+     the results file.)
+
+  9. There are lots more settings files for the model files in the
+     Tests/ directory.  Some include Euler rotation, some include
+     perspective projection, some include both.  Your code should
+     get IDENTICAL results to those shown in the corresponding
+     results files in the Results/ directory.
+
+ 10. Capture the output of hmwk_05 in a file with the extension
+     "sdf" and you can display it using the provided Display tool.
+
+     Your displays should look EXACTLY like the provided
+     screenshots.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_05_abc1234' directory (with your
+source files in it) and submit it on Canvas as your results
+for this assignment.
+
+You can get dinged points for work not in the proper format so
+even if your program works (and works correctly!), you might not
+earn full credit.  Check your work!
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and runs correctly.  Not
+     compiling or not generating the correct output as shown in
+     the results sdf files will cost you points.
+
+     The output from your programs will be compared using diff
+     against evaluation results from other test problems so ensure
+     you DO NOT CHANGE anything aside from those TODO sections of
+     code mentioned above.
+
+     Please, please, please check your output against the test
+     cases using diff (or fc on Windows).  Output that does not
+     match EXACTLY scores ZERO points.
+
+       NOTE WELL:  The test cases given are samples only.
+       No claim is made that your code is guaranteed to be
+       "correct" merely because it passes the sample test
+       cases.  Make some test cases of your own to further
+       exercise your code.
+
+       Your code will be run against other test cases during
+       the grading process.
+
+  2. Ensure that you update the three header lines in the source
+     files with YOUR name (family name first, then a comma, then
+     your personal name), YOUR NetID, and the date you edit the
+     file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. In generateBezierPoints(), your code will use the definitions
+     of the patches (which come from model's m_patch array, each
+     entry of which is an array of 16 vertex indices, each of
+     which is a control point) to create the surface points that
+     correspond to the Bézier patch at the given resolution.  As
+     the surface points are created, they should be stored in
+     order in model's m_patchVertex array.
+
+     Ensure that your nested loop structure in this routine is
+     correct: from the outside in the order of the loops is
+     outermost the patches, then the values of u, and innermost
+     the values of v.
+
+     (NOTE: For precision, make the u, v loops INTEGER BASED and
+     compute the real values of u and v from those integers.)
+
+     For each pair of u, v values, you must first get the set of
+     16 Bernstein coefficients.  Declare an array of 16 doubles to
+     hold these cofficients and pass it and the current u, v
+     values to the _computeCoefficients() routine to do the actual
+     computations.
+
+     Multiply each coefficient by its corresponding control point
+     (which comes from model's m_vertex array) and sum the results
+     into the current point (which is in model's m_patchVertex
+     array).  This is done for each of the point's components x,
+     y, and z.
+
+  4. The coefficients should be computed by _computeCoefficient().
+     The math to do this is in the "4303 Bézier computation.pdf"
+     handout on Canvas.
+
+     Ensure that you compute these coefficients in the correct
+     order: c00, c01, c02, ... c31, c32, c33.
+
+     The math to do this is not tricky, but as with the Euler
+     rotation coefficients, one must be careful when transcribing
+     the formulae.
+
+  5. The Bézier surface points have to be converted into triangles
+     so they can be dumped.  This conversion and dumping is the
+     job of the routine generateBezierTriangles().
+
+     This routine also has a nested loop structure three deep. The
+     outermost loop is over the patches, then over the rows of the
+     generated surface points, and innermost over the columns of
+     the points.
+
+     At each combination of row and column values, you have to
+     create two triangles.  The first has the three vertices
+     ( row, column ), ( row+1, column ), ( row+1, column+1 ).  The
+     second triangle has the three vertices ( row+1, column+1 ),
+     ( row, column+1 ), ( row, columm ).
+
+     Use the dumpTriangle() routine to dump each triangle as you
+     generate it.  Note that nothing is "remembered" in this
+     routine;  the vertices making up each triangle are identified
+     and the triangle is dumped.
+
+     (NOTE: The loops for row and column should run from 0 to
+      resolution-1 as each generated triangle uses the vertices on
+      the next row and next column.)
+
+  6. The dumpTriangle() routine takes pointers to three vertices
+     and dumps the lines generated by considering these vertices
+     in the order v1, v2, v3.  Each line should be checked with
+     clipLine() to see if it should be dumped at all.
+
+  7. setPortal() should remember the given view so dumpTriangle()
+     has it available to clip lines.
+
+  8. This is not a lot of code:
+
+      bezier.c:17:   // TODO: Iterate through each patch, each value of u, and each ...
+        15 lines of code.
+
+      bezier.c:30:   // TODO: Iterate through each patch, each row of that patch, and ...
+        18 lines of code.
+
+      bezier.c:45:   // TODO: For the given u and v values, generate the 16 Bernstein ...
+        26 lines of code.
+
+      triangle.c:15: // TODO:  Draw the three lines that are made from v1, v2, and ...
+        22 lines of code.
+
+      triangle.c:24: // TODO:  Remember the view so it can be clipped against when ...
+         1 line of code.
+
+     NOTE: You do not have to end up with EXACTLY the same number
+           of lines of code.  It's often the case that different
+           persons break code up into different numbers of lines.
+           However, if you find yourself writing a lot more code
+           than this, you are probably going down the wrong path.
+
+  9. Ensure your submission is packaged EXACTLY as described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_05_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_05_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  Do not
+         change the name of any of the source files.
+
+     Submissions in the wrong format score ZERO points.
+
+ 10. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the program runs and prints the correct output,
+     and that you updated the header lines correctly in the source
+     files.
+
+     Please, please, please check that you didn't accidentally
+     submit the template code instead of your solution.  Every
+     semester, every class, and almost every homework someone
+     makes this mistake.  Don't be that guy!
+
+ 11. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------
