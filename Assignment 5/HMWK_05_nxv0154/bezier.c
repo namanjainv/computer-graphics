@@ -1,6 +1,6 @@
 // Vimal Kumar, Naman Jain
 // nxv0154
-// 2019-11-05
+// 2019-11-11
 //----------------------------------------------------------
 #include <stdio.h>
 
@@ -76,7 +76,7 @@ void generateBezierTriangles( Model *model, int resolution )
 
   for( int patch_index = 0 ; patch_index < model->m_numPatches ; patch_index++ ) {
     for( int row = 0 ; row < resolution - 1 ; row++ ) {
-      int rowStart = row * resolution;
+      int rowStart = row * resolution + (patch_index * resolution * resolution);
 
       for( int col = 0 ; col < resolution - 1 ; col++ ) {
         int here = rowStart + col;
