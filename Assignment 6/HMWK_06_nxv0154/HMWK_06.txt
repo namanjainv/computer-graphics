@@ -1,0 +1,238 @@
+#----------------------------------------------------------------------
+Assignment 06
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate the ability to backface cull triangles according
+    to the method discussed in class.
+
+#----------------------------------------------------------------------
+Background:
+
+  * All the math you need for this assignment has been discussed
+    in class multiple times so you should not have any
+    difficulties in writing the code.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download hmwk_06_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_06_abc1234' but with _your_ NetID in place of
+      'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the *.c and *.h files.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file, in the format
+                  YYYY-MM-DD.
+
+  6. Execute these commands to compile and run the hmwk_06.c
+     template:
+
+$ ./hmwk_06 Tests/Monkey.svfm Tests/Monkey_setting_01.view 
+#- Model parameters --------------------
+# Vertex count       :   507
+# Face count         :   967
+# Patch count        :     0
+# Patch vertex count :     0
+# Minimum            : (     -1.367188,     -0.984375,     -0.851562 )
+# Maximum            : (      1.367188,      0.984375,      0.851562 )
+# Center             : (      0.000000,      0.000000,      0.000000 )
+# Size               : (      2.734376,      1.968750,      1.703124 )
+#---------------------------------------
+#- View parameters ---------------------
+# Bézier resolution :     0
+# Backface culling? : Yes
+# Euler angles      :     25.000000,    -10.000000,     17.000000
+# World limits      :     -1.640625,     -1.181250,      1.640625,      1.181250
+# Camera distance   :      2.000000
+# Canvas width      :   800
+# Canvas height     :   800
+# Screen limits     :      0.050000,      0.050000,      0.950000,      0.950000
+# Portal pixels     :   40,  760,   40,  760
+#---------------------------------------
+#- Projection parameters ---------------
+# (fx, fy) : (      1.640625,      1.181250 )
+# (gx, gy) : (     40.000000,     40.000000 )
+# (sx, sy) : (    219.428571,    304.761905 )
+# (ax, ay) : (    400.000000,    400.000000 )
+# Camera distance :      2.000000
+#---------------------------------------
+#- Rotation parameters -----------------
+# r00, r01, r02 :      0.941776,     -0.287930,     -0.173648
+# r10, r11, r12 :      0.194799,      0.888163,     -0.416198
+# r20, r21, r22 :      0.274064,      0.358139,      0.892539
+# ex,  ey,  ez  :      0.000000,      0.000000,      0.000000
+#---------------------------------------
+c  800  800
+l     40.0     40.0     40.0    760.0
+l     40.0    760.0    760.0    760.0
+l    760.0    760.0    760.0     40.0
+l    760.0     40.0     40.0     40.0
+
+      Notice that aside from the "c" line for the canvas size and
+      the four lines for the portal edges, there are no other
+      drawing lines ("l" or "p" lines).  That's because you
+      haven't written any of the new required routines yet.
+
+  7. Now fix all of the TODO: spots in the *.c files:
+
+      bezier.c:53:     // TODO: Call cullProjectDumpTriangle() with the proper ...
+      cull.c:15:       // TODO: Compute the toTriangle vector.  Compute the triangle ...
+      hmwk_06.c:84:    // TODO: Call cullProjectDumpTriangle() with the proper ...
+      projection.c:70: // TODO: Using the given projection parameters, project vertex ...
+      projection.c:76: // TODO: Project numVertices starting at v[0] using the given ...
+      triangle.c:18:   // TODO: If culling is active and the triangle should be culled, ...
+
+     Each spot tells you what you need to write.
+
+  8. Recompile hmwk_06.c and run it again with the arguments
+     Tests/Monkey.svfm and Tests/Monkey_setting_01.view and you
+     should get the results as shown in the file
+     Results/Monkey_01_results.txt.  Your results should match
+     EXACTLY.  (Use diff / fc to compare your output to that of
+     the results file.)
+
+  9. There are lots more settings files for the model files in the
+     Tests/ directory.  Some include Euler rotation, some include
+     perspective projection, some include both.  Some are simple
+     vertex / face models, some include Bézier patches.  Your code
+     should get IDENTICAL results to those shown in the
+     corresponding results files in the Results/ directory.
+
+ 10. Capture the output of hmwk_06 in a file with the extension
+     "sdf" and you can display it using the provided Display tool.
+
+     Your displays should look EXACTLY like the provided
+     screenshots.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_06_abc1234' directory (with your
+source files in it) and submit it on Canvas as your results
+for this assignment.
+
+You can get dinged points for work not in the proper format so
+even if your program works (and works correctly!), you might not
+earn full credit.  Check your work!
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your program compiles and runs correctly.  Not
+     compiling or not generating the correct output as shown in
+     the results sdf files will cost you points.
+
+     The output from your programs will be compared using diff
+     against evaluation results from other test problems so ensure
+     you DO NOT CHANGE anything aside from those TODO sections of
+     code mentioned above.
+
+     Please, please, please check your output against the test
+     cases using diff (or fc on Windows).  Output that does not
+     match EXACTLY scores ZERO points.
+
+       NOTE WELL:  The test cases given are samples only.
+       No claim is made that your code is guaranteed to be
+       "correct" merely because it passes the sample test
+       cases.  Make some test cases of your own to further
+       exercise your code.
+
+       Your code will be run against other test cases during
+       the grading process.
+
+  2. Ensure that you update the three header lines in the source
+     files with YOUR name (family name first, then a comma, then
+     your personal name), YOUR NetID, and the date you edit the
+     file (in the format YYYY-MM-DD).
+
+     Not updating the header lines properly will cost you points.
+
+  3. When computing the "toTriangle" vector, be careful if the
+     camera distance is zero.  Having a camera distance of zero
+     means there is no perspective calculation:  the projection is
+     parallel.
+
+     In this case, the "effective" camera distance is +infinity
+     along the Z axis, so use that distance in the "toTriangle"
+     vector computation.
+
+  4. Ensure you compute the cross product of the triangle side
+     vectors to get the normal vector in the correct order.  If
+     you don't, all of your normal vectors will be reversed.
+
+  5. In projectVertex(), ensure that you do not change v1.  Do the
+     projection into local variables and put the result in v2.
+
+  7. This is not a lot of code:
+
+      bezier.c:53:     // TODO: Call cullProjectDumpTriangle() with the proper ...
+        10 lines of code.
+
+      cull.c:15:       // TODO: Compute the toTriangle vector.  Compute the triangle ...
+        21 lines of code.
+
+      hmwk_06.c:84:    // TODO: Call cullProjectDumpTriangle() with the proper ...
+         7 lines of code.
+
+      projection.c:70: // TODO: Using the given projection parameters, project vertex ...
+        15 lines of code.
+
+      projection.c:76: // TODO: Project numVertices starting at v[0] using the given ...
+         2 lines of code.
+
+      triangle.c:18:   // TODO: If culling is active and the triangle should be culled, ...
+        10 lines of code.
+
+     NOTE: You do not have to end up with EXACTLY the same number
+           of lines of code.  It's often the case that different
+           persons break code up into different numbers of lines.
+           However, if you find yourself writing a lot more code
+           than this, you are probably going down the wrong path.
+
+  8. Ensure your submission is packaged EXACTLY as described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_06_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_06_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  Do not
+         change the name of any of the source files.
+
+     Submissions in the wrong format score ZERO points.
+
+  9. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the program runs and prints the correct output,
+     and that you updated the header lines correctly in the source
+     files.
+
+     Please, please, please check that you didn't accidentally
+     submit the template code instead of your solution.  Every
+     semester, every class, and almost every homework someone
+     makes this mistake.  Don't be that guy!
+
+ 10. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------

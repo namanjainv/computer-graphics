@@ -1,0 +1,17 @@
+# Bézier resolution ...
+r 5
+
+# We are looking at anything that has (x,y) within
+# the following region.  This is a box that stretches
+# infinitely in the z-dimension.
+w   -1.10       -0.60        1.10        1.45
+
+# Canvas size is 4:3 ...
+c   1800   1350
+
+# For display, we are leaving a 5% border about the
+# active area.
+s    0.05    0.05    0.95    0.95
+
+# Backface cull
+b  0

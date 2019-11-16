@@ -1,0 +1,17 @@
+# We are looking at anything that has (x,y) within
+# the following region.  This is a box that stretches
+# infinitely in the z-dimension.
+w  -20.0  -20.0   20.0   20.0
+
+# Canvas size ...
+c   1800   1800
+
+# For display, we are leaving a 5% border about the
+# active area.
+s    0.050000    0.050000    0.950000    0.950000
+
+# We want to rotate the model ...
+e   90.0      0.0    -70.0
+
+# Backface cull
+b  0
