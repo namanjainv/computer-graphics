@@ -1,6 +1,6 @@
-// Dalio, Brian A.
-// dalioba
-// 2019-11-03
+// Vimal Kumar, Naman Jain
+// nxv0154
+// 2019-11-22
 
 #if !defined( __MODEL_H__ )
 #define __MODEL_H__
