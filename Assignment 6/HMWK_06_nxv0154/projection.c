@@ -69,6 +69,26 @@ void projectVertex( Projection *p, Vertex *v1, Vertex *v2 )
 {
   // TODO: Using the given projection parameters, project vertex
   //       v1 and put the result in v2.  Do not change v1.
+
+
+  double x = v1->x;
+  double y = v1->y;
+  double z = v1->z;
+  if ( p->m_cameraDistance != 0.0 ) {
+
+    if ( z >= p->m_cameraDistance ) {
+      printf( "Vertex has z (%13.6f) >= the camera distance (%13.6f)\n",
+        z, p->m_cameraDistance );
+    } else {
+      x = x / ( 1 - z/p->m_cameraDistance );
+      y = y / ( 1 - z/p->m_cameraDistance );
+    }
+  }
+    
+
+  v2->x = p->m_sx*x + p->m_ax;
+  v2->y = p->m_sy*y + p->m_ay;
+  v2->z = 0.0;
 }
 
 void projectVertexList( Projection *p, Vertex *v, int numVertices )
@@ -76,6 +96,26 @@ void projectVertexList( Projection *p, Vertex *v, int numVertices )
   // TODO: Project numVertices starting at v[0] using the given
   //       projection parameters.  It's OK to put the projected
   //       coordinate values back into the same spot.
+
+  for ( int i=0; i<numVertices; i++ ) {
+    double x = v[i].x;
+    double y = v[i].y;
+    double z = v[i].z;
+
+    if ( p->m_cameraDistance != 0.0 ) {
+      if ( z >= p->m_cameraDistance ) {
+        printf( "Vertex %d has z (%13.6f) >= the camera distance (%13.6f)\n",
+          i, z, p->m_cameraDistance );
+      } else {
+        x = x / ( 1 - z/p->m_cameraDistance );
+        y = y / ( 1 - z/p->m_cameraDistance );
+      }
+    }
+
+    v[i].x = p->m_sx*x + p->m_ax;
+    v[i].y = p->m_sy*y + p->m_ay;
+    v[i].z = 0.0;
+  }
 }
 
 //----------------------------------------------------------
