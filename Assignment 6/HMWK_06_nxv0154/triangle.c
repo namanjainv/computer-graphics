@@ -15,25 +15,28 @@ View *_view = NULL;
 //----------------------------------------------------------
 void cullProjectDumpTriangle( View *view, Projection *projection, Vertex *v1, Vertex *v2, Vertex *v3 )
 {
-  // TODO: If culling is active and the triangle should be culled,
-  //       do nothing.  Otherwise project the vertices and dump
-  //       the triangl.
 
   Vertex cameraPosition;
   cameraPosition.x = 0;
   cameraPosition.y = 0;
-  cameraPosition.z = projection->m_cameraDistance;
+  if( projection->m_cameraDistance == 0 )
+    cameraPosition.z = 9999999999999;
+  else
+    cameraPosition.z = projection->m_cameraDistance;
 
   
-  if( cull( v1, v2, v3, &cameraPosition ) == 0 ) {
-
-    Vertex pv1, pv2, pv3;
-    projectVertex(projection, v1, &pv1);
-    projectVertex(projection, v2, &pv2);
-    projectVertex(projection, v3, &pv3);
-
+  Vertex pv1, pv2, pv3;
+  projectVertex(projection, v1, &pv1);
+  projectVertex(projection, v2, &pv2);
+  projectVertex(projection, v3, &pv3);
+  
+  if( view->m_cull ) {
+    if( cull( v1, v2, v3, &cameraPosition ) == 0 ) {
+      dumpTriangle(&pv1, &pv2, &pv3);
+    }
+  }
+  else {
     dumpTriangle(&pv1, &pv2, &pv3);
-
   }
 }
 

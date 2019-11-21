@@ -25,9 +25,9 @@ int cull( Vertex *v1, Vertex *v2, Vertex *v3, Vertex *cameraPosition )
   // printf("\nCamera Position: ");
   // dumpVertex(cameraPosition);
   Vertex toTriangle;
-  toTriangle.x = v3->x - cameraPosition->x;
-  toTriangle.y = v3->y - cameraPosition->y;
-  toTriangle.z = v3->z - cameraPosition->z;
+  toTriangle.x = v1->x - cameraPosition->x;
+  toTriangle.y = v1->y - cameraPosition->y;
+  toTriangle.z = v1->z - cameraPosition->z;
   // printf("\nTo Triange: ");
   // dumpVertex(&toTriangle);
 
@@ -54,7 +54,7 @@ int cull( Vertex *v1, Vertex *v2, Vertex *v3, Vertex *cameraPosition )
   
   double dot = ( toTriangle.x * normal.x ) + ( toTriangle.y * normal.y ) + ( toTriangle.z * normal.z );
   // printf("\nDot: %f\n", dot);
-  if(dot >= 0) {
+  if(dot > 0) {
     return 1;
   }
   else {

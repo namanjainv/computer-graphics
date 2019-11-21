@@ -50,8 +50,8 @@ void generateBezierTriangles( Model *model, View *view, Projection *projection )
         int here  = rowStart + col;
         int there = here + resolution;
 
-        // TODO: Call cullProjectDumpTriangle() with the proper
-        //       arguments for the generated triangles.
+        cullProjectDumpTriangle( view, projection, &model->m_patchVertex[here], &model->m_patchVertex[there], &model->m_patchVertex[there + 1] );
+        cullProjectDumpTriangle( view, projection, &model->m_patchVertex[there + 1], &model->m_patchVertex[here + 1], &model->m_patchVertex[here] );
       }
     }
   }
