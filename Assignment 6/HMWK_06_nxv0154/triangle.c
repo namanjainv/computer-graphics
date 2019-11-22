@@ -19,10 +19,7 @@ void cullProjectDumpTriangle( View *view, Projection *projection, Vertex *v1, Ve
   Vertex cameraPosition;
   cameraPosition.x = 0;
   cameraPosition.y = 0;
-  if( projection->m_cameraDistance == 0 )
-    cameraPosition.z = 9999999999999;
-  else
-    cameraPosition.z = projection->m_cameraDistance;
+  cameraPosition.z = projection->m_cameraDistance;
 
   
   Vertex pv1, pv2, pv3;
